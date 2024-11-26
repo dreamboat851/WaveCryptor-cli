@@ -8,9 +8,9 @@ This will execute the encoding process with the message "Hello World!" and a 40%
 
 It will also generate the following files: 
 
-composite_message.wav
-encryption_key.key
-frequency_key_encrypted.json
+- composite_message.wav
+- encryption_key.key
+- frequency_key_encrypted.json
 
 Provide the above files are at the same directory as the decode.py file, you can regenerate the original message by 
 
