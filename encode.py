@@ -7,6 +7,7 @@ import base64
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import padding
+import argparse
 
 # Frequency map generator
 def dynamic_frequency_allocation():
@@ -29,7 +30,7 @@ def create_composite_wave(message, freq_map, unused_freqs, filename, duration=0.
             wave_segment = 0.5 * np.sin(2 * np.pi * freq * t)
             composite_wave = np.concatenate((composite_wave, wave_segment))
 
-            if random.random() < 0.4 and unused_freqs:
+            if random.random() < nothing_probability and unused_freqs:
                 nothing_freq = random.choice(unused_freqs)
                 wave_segment = 0.5 * np.sin(2 * np.pi * nothing_freq * t)
                 composite_wave = np.concatenate((composite_wave, wave_segment))
@@ -63,18 +64,29 @@ def write_encryption_key(key_filename):
         f.write(encoded_key)
     return encryption_key
 
+# Command line argument parsing
+def parse_arguments():
+    parser = argparse.ArgumentParser(description="WaveCryptor Encoding Script")
+    parser.add_argument('--message', type=str, required=True, help="Message to encode")
+    parser.add_argument('--nothing_probability', type=float, required=True, help="Probability of adding nothing frequencies")
+    args = parser.parse_args()
+    return args.message, args.nothing_probability
+
 # Main execution
-#message = "Dear Sir,  I hope this email finds you well. I am writing to kindly request you about the necessary corrections to our thesis, as the submission deadline to the department is approaching. ".upper()
-message = "Hello World!".upper()
+if __name__ == "__main__":
+    message, nothing_probability = parse_arguments()
 
-composite_file = "composite_message.wav"
-frequency_key_file = "frequency_key_encrypted.json"
-encryption_key_file = "encryption_key.key"
+    # Make sure the message is uppercase as in your original code
+    message = message.upper()
 
-# Generate and store frequency map and encryption key
-freq_map, unused_freqs = dynamic_frequency_allocation()
-create_composite_wave(message, freq_map, unused_freqs, composite_file)
-encryption_key = write_encryption_key(encryption_key_file)
-encrypt_frequency_key_file(freq_map, unused_freqs, frequency_key_file, encryption_key)
+    composite_file = "composite_message.wav"
+    frequency_key_file = "frequency_key_encrypted.json"
+    encryption_key_file = "encryption_key.key"
 
-print("Files created: composite_message.wav, frequency_key_encrypted.json, encryption_key.key")
+    # Generate and store frequency map and encryption key
+    freq_map, unused_freqs = dynamic_frequency_allocation()
+    create_composite_wave(message, freq_map, unused_freqs, composite_file)
+    encryption_key = write_encryption_key(encryption_key_file)
+    encrypt_frequency_key_file(freq_map, unused_freqs, frequency_key_file, encryption_key)
+
+    print("Files created: composite_message.wav, frequency_key_encrypted.json, encryption_key.key")
