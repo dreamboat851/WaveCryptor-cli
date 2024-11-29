@@ -12,6 +12,6 @@ It will also generate the following files:
 - encryption_key.key
 - frequency_key_encrypted.json
 
-Provide the above files are at the same directory as the decode.py file, you can regenerate the original message by 
+Provided that the above files are at the same directory as the decode.py file, you can regenerate the original message by 
 
 python decode.py
