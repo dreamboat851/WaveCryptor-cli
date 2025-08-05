@@ -16,6 +16,6 @@ Provided that the above files are at the same directory as the decode.py file, y
 
 python decode.py
 
-If you use WaveCryptor, please cite:
+## If you use WaveCryptor, please cite:
 
 S. Pemasinghe, "WaveCryptor: A Secure Hybrid Framework Combining Encryption and Steganography via Frequency Mapping," 2025 5th International Conference on Advanced Research in Computing (ICARC), Belihuloya, Sri Lanka, 2025, pp. 1-6, doi: 10.1109/ICARC64760.2025.10962964.
